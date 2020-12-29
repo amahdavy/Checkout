@@ -1,0 +1,60 @@
+﻿@model TransactionModel
+
+
+<div class="container">
+    <h2>List of payments</h2>
+
+
+    <form method="post">
+        <div class="row">
+            <div class="form-group col">
+                <label asp-for="APIKey">API Call Mode</label>
+                <select class="form-control" asp-for="APIKey" asp-items="@Model.GetAPIKeys()"></select>
+            </div>
+            <div class="form-group col">
+                <input type="submit" name="ShowData" value="Show Data" class="btn btn-primary" asp-action="GetData" />
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">TransctionCode</th>
+                <th scope="col">Date created</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (PaymentResponse payment in Model.Transactions)
+            {
+                <tr>
+                    <td>@payment.TransctionCode</td>
+                    <td>@payment.CreateDateTime</td>
+                    <td>@payment.Amount.ToString()</td>
+                    <td>@payment.PaymentStatus</td>
+
+                    <td>
+                        @if (payment.PaymentStatus == "Open")
+                        {
+                            <a href="@payment.CheckoutUrl" class="btn btn-outline-secondary" target="_blank">Pay</a>
+                        }
+
+                        @if (payment.PaymentStatus == "Paid")
+                        {
+                            <form method="post" asp-controller="CardTransactions" asp-action="Detail" asp-route-id="@payment.TransctionCode" >
+                                <input type="submit" name="Detail" value="Detail" class="btn btn-outline-secondary" />
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>

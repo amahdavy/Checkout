@@ -1,0 +1,50 @@
+﻿
+@model PaymentModel
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://localhost:44300">Checkou Payment API</a>.</p>
+
+
+
+</div>
+
+
+<div class="container">
+
+    
+
+    <form method="post">
+        <div class="form-group w-50">
+            <label asp-for="APIKey">API Call Mode</label>
+            <select class="form-control" asp-for="APIKey" asp-items="@Model.GetAPIKeys()"></select>
+        </div>
+        <div asp-validation-summary="All"></div>
+
+        <div class="row justify-content-between">
+            <div class="col-4">
+                <h3>Create new payment</h3>
+                <div class="form-group">
+                    <label asp-for="Amount"></label>
+                    <input class="form-control" asp-for="Amount" autocomplete="off" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Currency"></label>
+                    <select class="form-control" asp-for="Currency" asp-items="@Html.GetStaticStringSelectList(typeof(Currency))"></select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+                </div>
+
+                <input type="submit" name="Save" value="Save" class="btn btn-primary" />
+            </div>
+            <div class="col-4">
+                <h3>  Top 20 Transactions</h3>
+                <a href="/CardTransactions" class="btn btn-success"  >Show</a>
+            </div>
+        </div>
+    </form>
+</div>

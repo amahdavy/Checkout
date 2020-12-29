@@ -1,0 +1,156 @@
+﻿@model CardPaymentModel
+@{
+    ViewData["Title"] = "payment";
+}
+
+<div class="container">
+    <form method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="row h-100 creditCardForm">
+            <div class="col-sm-12 my-auto">
+                <div class="box-shadow card card-block w-50 mx-auto" style="background-color:ghostwhite">
+                    <div style="padding:10px;">
+                        <div class="text-center">
+                            <div>
+                                @if (!string.IsNullOrWhiteSpace(Model.Logo))
+                                {
+                                    <img src="@Model.Logo" alt="logo" class="figure-img" id="logo" />
+                                }
+                            </div>
+                            <br />
+                            <div class="align-content-center">
+                                <strong>@Model.Merchant</strong>
+                                <br />
+                            </div>
+                            <div class="text-center">
+                                <strong> @Model.Amount @Model.Currency </strong>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fab fa-cc-visa" style="color:navy;"></i>
+                                <i class="fab fa-cc-amex" style="color:blue;"></i>
+                                <i class="fab fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fab fa-cc-discover" style="color:orange;"></i>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-light"><span class="glyphicon-inf" />@Model.Description</div>
+                        <div class=" box-shadow ">
+                            <div class="padding50 border-dark" style="background-color:white;">
+                                <div class="payment">
+
+                                    <div class="form-group owner">
+                                        <label for="owner">Owner</label>
+                                        <input type="text" class="form-control" id="CardName" asp-for="CardName" placeholder="John More Doe">
+                                    </div>
+
+                                    <div class="form-group billing">
+                                        <label for="BillingAddress">Billing Address</label>
+                                        <input type="text" class="form-control" id="BillingAddress" name="BillingAddress" placeholder="Billing Address" asp-for="BillingAddress">
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-9" id="card-number-field">
+                                            <label for="cardNumber">Card Number</label>
+                                            <input type="text" class="form-control" id="cardNumber" name="cardNumber" autocomplete="cc-number" 
+                                                   maxlength="19" placeholder="xxxx xxxx xxxx xxxx" asp-for="CardNumber" >
+                                        </div>
+                                        <div class="form-group CVV col-3">
+                                            <label for="cvv">CVV</label>
+                                            <input type="text" class="form-control" id="cvv" name="CCV" asp-for="CCV" maxlength="4" >
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col" id="expiration-date">
+                                            <label for="ExpMonth">Expiration Month</label>
+                                            <select name="ExpMonth" id="ExpMonth" asp-for="ExpMonth" class="form-control">
+                                                <option value="01">January</option>
+                                                <option value="02">February </option>
+                                                <option value="03">March</option>
+                                                <option value="04">April</option>
+                                                <option value="05">May</option>
+                                                <option value="06">June</option>
+                                                <option value="07">July</option>
+                                                <option value="08">August</option>
+                                                <option value="09">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="ExpYear">Expiration Year</label>
+                                            <select id="ExpYear" name="ExpYear" asp-for="ExpYear" asp-items="@Model.GetExpirYears()" class="form-control">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (Model.IsTestMode)
+                                {
+                                    <hr />
+                                    <div class="form-group">
+                                        <label asp-for="PaymentStatus"></label>
+                                        <select class="form-control" asp-for="PaymentStatus" asp-items="@Html.GetStaticStringSelectList(typeof(PaymentStatus))"></select>
+                                    </div>
+
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="text-center form-group" id="pay-now" style="margin-top:10px;">
+                        <button class="btn btn-primary"   asp-action="PayWithCard"> Confirm </button>
+                    </div>
+                    <div style="margin-bottom:5px;" class="text-center">
+                        <span style="color:#808080;font-size:smaller;"><i class="fas fa-lock"></i><i> Payment secured and provided by CheckOut.Com</i></span>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-block row" style="clear:both">
+            <div style="margin-bottom:5px;padding:10px;" class="d-inline-flex"><a href="#"><< Payment Method</a></div>
+        </div>
+    </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="~/js/jquery.payform.min.js" asp-append-version="false"></script>
+<script>
+    $(function () {
+        jQuery.fn.ForceNumericOnly =
+            function () {
+                return this.each(function () {
+                    $(this).keydown(function (e) {
+                        var key = e.charCode || e.keyCode || 0;
+                        // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+                        // home, end, period, and numpad decimal
+                        return (
+                            key == 8 ||
+                            key == 9 ||
+                            key == 13 ||
+                            key == 46 ||
+                            key == 110 ||
+                            key == 190 ||
+                            (key >= 35 && key <= 40) ||
+                            (key >= 48 && key <= 57) ||
+                            (key >= 96 && key <= 105));
+                    });
+                });
+            };
+
+       $('#cardNumber').ForceNumericOnly();
+       $("#cvv").ForceNumericOnly();
+        $('#cardNumber').keyup(function () {
+            var foo = $(this).val().split("-").join(""); // remove hyphens
+            if (foo.length > 0) {
+                foo = foo.match(new RegExp('.{1,4}', 'g')).join("-");
+            }
+            $(this).val(foo);
+        });
+    });
+</script>

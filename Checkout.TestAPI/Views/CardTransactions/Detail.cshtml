@@ -1,0 +1,42 @@
+﻿@model CardTransactionResponse
+<div class="container">
+
+
+    <div class="row h-100">
+        <div class="col-sm-12 my-auto">
+            <div class="box-shadow card card-block w-50 mx-auto" style="background-color:ghostwhite">
+                <div style="padding:50px;">
+                    
+
+                    <div class="alert alert-light"><span class="glyphicon-inf" />@Model.Description</div>
+                    <div class=" box-shadow ">
+                        <div class="padding50 border-dark" style="background-color:white;">
+                            <div class="row">
+                                <div class="col">Amount :</div>
+                                <div class="col"><strong> @Model.Amount @Model.Currency </strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col">Name on Card:</div>
+                                <div class="col">@Model.HolderName</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">Credit card number:</div>
+                                <div class="col">@Model.CardNumber</div>
+                            </div>
+                              
+                        </div>
+
+
+                    </div>
+                </div>
+                 
+            </div>
+
+        </div>
+    </div>
+
+    <div class="d-block row" style="clear:both">
+        <div style="margin-bottom:5px;padding:10px;" class="d-inline-flex"><a href="/CardTransactions"><< Transaction List</a></div>
+    </div>
+
+</div>

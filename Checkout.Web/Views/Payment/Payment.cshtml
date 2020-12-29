@@ -1,0 +1,55 @@
+﻿@model PaymentModel
+@{
+    ViewData["Title"] = "payment";
+}
+
+<h1>Payment Screen</h1>
+
+<div class="container">
+
+    <div class="row h-100">
+        <div class="col-sm-12 my-auto">
+            <div class="box-shadow card card-block w-50 mx-auto" style="background-color:ghostwhite">
+                <div style="padding:50px;">
+                    <div class="text-center">
+                        <div>
+                            @if (!string.IsNullOrWhiteSpace(Model.Logo))
+                            {
+                                <img src="@Model.Logo" alt="logo" class="figure-img" id="logo" />
+                            }
+                        </div>
+                        <br />
+                        <div class="align-content-center">
+                            <strong>@Model.Merchant</strong>
+                            <br />
+                        </div>
+                        <div class="text-center">
+                            <strong> @Model.Amount @Model.Currency </strong>
+                        </div>
+                    </div>
+                    <div class="alert alert-light"><span class="glyphicon glyphicon-inf" />@Model.Description</div>
+                    <div class="box-shadow ">
+                        <div class="padding50 border-dark" style="background-color:white;">
+                            @foreach (PaymentMethodModel item in Model.PaymentMethods)
+                            {
+                                <a href="@item.Href" class="text-decoration-none">
+
+                                    <i class="@item.Image" style="color:navy;"></i> &nbsp; <span>@item.Name</span>
+
+                                </a>
+                                <hr />
+                            }
+                        </div>
+                    </div>
+                    <div style="margin-bottom:5px;" class="text-center">
+                        <span style="color:#808080;font-size:smaller;"><i class="fas fa-lock"></i><i> Payment secured and provided by CheckOut.Com</i></span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

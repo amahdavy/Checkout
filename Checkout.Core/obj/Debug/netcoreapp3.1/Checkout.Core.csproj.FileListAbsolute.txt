@@ -1,0 +1,13 @@
+E:\SourceCodes\CheckoutSln\Checkout.Core\bin\Debug\netcoreapp3.1\Checkout.Core.dll.config
+E:\SourceCodes\CheckoutSln\Checkout.Core\bin\Debug\netcoreapp3.1\Checkout.Core.deps.json
+E:\SourceCodes\CheckoutSln\Checkout.Core\bin\Debug\netcoreapp3.1\Checkout.Core.runtimeconfig.json
+E:\SourceCodes\CheckoutSln\Checkout.Core\bin\Debug\netcoreapp3.1\Checkout.Core.runtimeconfig.dev.json
+E:\SourceCodes\CheckoutSln\Checkout.Core\bin\Debug\netcoreapp3.1\Checkout.Core.dll
+E:\SourceCodes\CheckoutSln\Checkout.Core\bin\Debug\netcoreapp3.1\Checkout.Core.pdb
+E:\SourceCodes\CheckoutSln\Checkout.Core\obj\Debug\netcoreapp3.1\Checkout.Core.AssemblyInfoInputs.cache
+E:\SourceCodes\CheckoutSln\Checkout.Core\obj\Debug\netcoreapp3.1\Checkout.Core.AssemblyInfo.cs
+E:\SourceCodes\CheckoutSln\Checkout.Core\obj\Debug\netcoreapp3.1\Checkout.Core.csproj.CoreCompileInputs.cache
+E:\SourceCodes\CheckoutSln\Checkout.Core\obj\Debug\netcoreapp3.1\Checkout.Core.dll
+E:\SourceCodes\CheckoutSln\Checkout.Core\obj\Debug\netcoreapp3.1\Checkout.Core.pdb
+E:\SourceCodes\CheckoutSln\Checkout.Core\obj\Debug\netcoreapp3.1\Checkout.Core.genruntimeconfig.cache
+E:\SourceCodes\CheckoutSln\Checkout.Core\obj\Debug\netcoreapp3.1\Checkout.Core.csprojAssemblyReference.cache
